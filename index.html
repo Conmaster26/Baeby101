@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Baeby E-Commerce Platform GitHub Setup</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+  }
+  pre {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+  button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+
+<h1>Baeby E-Commerce Platform - GitHub Setup Guide</h1>
+
+<h2>Quick Start</h2>
+
+<h3>1. Create a New GitHub Repository</h3>
+<ul>
+  <li>Go to <a href="https://github.com/new" target="_blank">https://github.com/new</a></li>
+  <li>Name it: <strong>baeby-clothing-brand</strong></li>
+  <li>Choose "Private" or "Public"</li>
+  <li>Click "Create repository"</li>
+</ul>
+
+<h3>2. Clone and Push Code</h3>
+<pre id="code1">git clone https://github.com/YOUR_USERNAME/baeby-clothing-brand.git
+cd baeby-clothing-brand
+
+# Copy all files from this package into the directory
+# (Copy the contents of the package folder here)
+
+# Add and commit
+git add .
+git commit -m "Initial commit: Baeby e-commerce platform"
+
+# Push to GitHub
+git push -u origin main
+</pre>
+<button onclick="copyToClipboard('code1')">Copy Clone & Push Commands</button>
+
+<h3>3. Install Dependencies</h3>
+<pre id="code2">pnpm install
+</pre>
+<button onclick="copyToClipboard('code2')">Copy Install Command</button>
+
+<h3>4. Set Up Environment Variables</h3>
+<p>Create a <code>.env.local</code> file in the root directory with the following content:</p>
+<pre id="code3"># Database
+DATABASE_URL=your_database_url
+
+# OAuth (Manus)
+VITE_APP_ID=your_app_id
+OAUTH_SERVER_URL=https://api.manus.im
+VITE_OAUTH_PORTAL_URL=https://oauth.manus.im
+
+# JWT
+JWT_SECRET=your_jwt_secret_key
+
+# Owner Info
+OWNER_NAME=Your Name
+OWNER_OPEN_ID=your_open_id
+
+# Forge API (Manus built-in)
+BUILT_IN_FORGE_API_URL=https://api.manus.im
+BUILT_IN_FORGE_API_KEY=your_forge_api_key
+VITE_FRONTEND_FORGE_API_KEY=your_frontend_forge_api_key
+VITE_FRONTEND_FORGE_API_URL=https://api.manus.im
+
+# Analytics
+VITE_ANALYTICS_ENDPOINT=your_analytics_endpoint
+VITE_ANALYTICS_WEBSITE_ID=your_website_id
+</pre>
+<button onclick="copyToClipboard('code3')">Copy Environment Variables</button>
+
+<h3>5. Run Locally</h3>
+<pre id="code4">pnpm dev
+pnpm test
+pnpm build
+</pre>
+<button onclick="copyToClipboard('code4')">Copy Run Commands</button>
+
+<h2>Project Structure</h2>
+<pre>
+baeby-clothing-brand/
+├── client/                 # React frontend
+│   ├── src/
+│   │   ├── pages/         # Page components
+│   │   ├── components/    # Reusable components
+│   │   ├── contexts/      # React contexts
+│   │   └── lib/           # Utilities
+│   └── public/            # Static assets
+├── server/                # Express backend
+│   ├── routers/           # tRPC routers
+│   │   ├── orders.ts      # Order management
+│   │   ├── payment.ts     # Bank transfer payments
+│   │   ├── admin.ts       # Admin dashboard
+│   │   └── webhooks.ts    # Webhook handlers
+│   └── _core/             # Core server utilities
+├── drizzle/               # Database schema
+├── shared/                # Shared types
+└── package.json           # Dependencies
+</pre>
+
+<h2>Key Features</h2>
+<ul>
+  <li>✅ <strong>Checkout System</strong> - Full order creation with delivery details</li>
+  <li>✅ <strong>Bank Transfer Payments</strong> - Card details collection and processing</li>
+  <li>✅ <strong>Admin Dashboard</strong> - Order management and profit tracking</li>
+  <li>✅ <strong>Database</strong> - Orders, customers, and profit ledger</li>
+  <li>✅ <strong>61 Unit Tests</strong> - All critical functionality tested</li>
+  <li>✅ <strong>Role-Based Access</strong> - Admin-only dashboard access</li>
+</ul>
+
+<h2>Database Schema</h2>
+<p>The application uses the following tables:</p>
+<ul>
+  <li><strong>users</strong> - User authentication</li>
+  <li><strong>customers</strong> - Customer information</li>
+  <li><strong>orders</strong> - Order records with totals and status</li>
+  <li><strong>orderItems</strong> - Products in each order</li>
+  <li><strong>profitLedger</strong> - Profit tracking to account 1996092373</li>
+</ul>
+
+<h2>API Endpoints (tRPC)</h2>
+<h3>Orders</h3>
+<ul>
+  <li><code>orders.createOrder</code> - Create new order</li>
+  <li><code>orders.getOrder</code> - Retrieve order details</li>
+  <li><code>orders.getOrderByNumber</code> - Get by order number</li>
+</ul>
+
+<h3>Payments</h3>
+<ul>
+  <li><code>payment.processBankTransfer</code> - Process bank transfer</li>
+  <li><code>payment.getPaymentInstructions</code> - Get bank details</li>
+  <li><code>payment.verifyPaymentStatus</code> - Check payment status</li>
+</ul>
+
+<h3>Admin</h3>
+<ul>
+  <li><code>admin.getDashboardStats</code> - Dashboard statistics</li>
+  <li><code>admin.getOrders</code> - List orders with pagination</li>
+  <li><code>admin.getProfitLedger</code> - Profit tracking</li>
+  <li><code>admin.updateOrderStatus</code> - Update order status</li>
+</ul>
+
+<h2>Deployment</h2>
+<h3>Option 1: Manus (Recommended)</h3>
+<p>The code is built for Manus deployment. Use the Manus Management UI to publish.</p>
+
+<h3>Option 2: Other Platforms</h3>
+<ul>
+  <li><strong>Vercel</strong>: Push to GitHub, connect Vercel, auto-deploys</li>
+  <li><strong>Railway</strong>: Connect GitHub repo, auto-deploys</li>
+  <li><strong>Render</strong>: Similar to Railway</li>
+  <li><strong>Self-hosted</strong>: Use <code>pnpm build</code> and deploy to your server</li>
+</ul>
+
+<h2>Business Logic</h2>
+<ul>
+  <li><strong>Profit Margin</strong>: R150 per order</li>
+  <li><strong>Tax</strong>: 15% on (subtotal + profit)</li>
+  <li><strong>Profit Account</strong>: 1996092373</li>
+  <li><strong>Shipping</strong>: 10-20 working days via Buffalo Logistics</li>
+</ul>
+
+<h2>Testing</h2>
+<pre>pnpm test
+
+# Run specific test file
+pnpm test server/routers/orders.test.ts
+
+# Watch mode
+pnpm test --watch
+</pre>
+<button onclick="copyToClipboard('code5')">Copy Testing Commands</button>
+
+<h2>Support</h2>
+<ul>
+  <li>Email: support@baeby.co.za</li>
+  <li>WhatsApp: 066 564 7535</li>
+</ul>
+
+<h2>License</h2>
+<p>MIT License - Feel free to use and modify as needed.</p>
+
+<script>
+function copyToClipboard(elementId) {
+  const text = document.getElementById(elementId).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Copied to clipboard!');
+  });
+}
+</script>
+
+</body>
+  </html>
